@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+var StreamBrake = require(__dirname + '/../index.js');
+
+process.stdin
+    .pipe(new StreamBrake((process.argv[2] || 128) * 1024 ))
+    .pipe(process.stdout);
