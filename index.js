@@ -126,6 +126,7 @@ StreamBrake.prototype.destroy = function () {
     this.writable = false;
     this.buckets = null;
     this.buffer = null;
+    this.emit('close');
 };
 
 
