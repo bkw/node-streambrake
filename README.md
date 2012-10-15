@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/bkw/node-streambrake.png)](http://travis-ci.org/bkw/node-streambrake)
+
 # node-streambrake
 
 A Node.js stream you can insert into a stream pipe to limit its throughput.
