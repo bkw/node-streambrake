@@ -82,7 +82,7 @@ StreamBrake.prototype.releaseBuffer = function () {
     } else {
         if (this.endSoon && ! this.buffer.bytesAhead()) {
             // exit
-            clearInterval(this.releaser);
+            this.destroy();
             this.emit('end');
             return;
         }
@@ -104,7 +104,18 @@ StreamBrake.prototype.end = function (input) {
     if (input) {
         this.write(input);
     }
+    this.writable = false;
     this.endSoon = true;
+};
+
+StreamBrake.prototype.destroy = function () {
+    if (this.releaser) {
+        clearTimeout(this.releaser);
+    }
+    this.readable = false;
+    this.writable = false;
+    this.buckets = null;
+    this.buffer = null;
 };
 
 
