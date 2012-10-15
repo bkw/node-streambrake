@@ -100,7 +100,10 @@ StreamBrake.prototype.resume = function () {
     this.paused = false;
 };
 
-StreamBrake.prototype.end = function () {
+StreamBrake.prototype.end = function (input) {
+    if (input) {
+        this.write(input);
+    }
     this.endSoon = true;
 };
 
