@@ -113,6 +113,7 @@ StreamBrake.prototype.end = function (input) {
     if (input) {
         this.write(input);
     }
+    this.readable = false;
     this.writable = false;
     this.endSoon = true;
 };
