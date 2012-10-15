@@ -27,6 +27,7 @@ StreamBrake = function (bps, numBuckets) {
     this.paused = false;
 
     this.relaser = null;
+    this.endSoon = false;
 };
 util.inherits(StreamBrake, Stream);
 
@@ -80,6 +81,12 @@ StreamBrake.prototype.releaseBuffer = function () {
     );
     if (toRelease) {
         this.send(this.buffer.buffer(toRelease));
+    } else {
+        if (this.endSoon && ! this.buffer.bytesAhead()) {
+            // exit
+            clearInterval(this.releaser);
+            return;
+        }
     }
     if (0 === this.buffer.bytesAhead() && this.buckets[0] < this.limit) {
         this.emit('drain');
@@ -95,6 +102,7 @@ StreamBrake.prototype.resume = function () {
 };
 
 StreamBrake.prototype.end = function () {
+    this.endSoon = true;
 };
 
 
