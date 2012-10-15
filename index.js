@@ -32,7 +32,16 @@ util.inherits(StreamBrake, Stream);
 
 StreamBrake.prototype.write = function (inBuffer) {
     var that = this,
-        headRoom, i;
+        headRoom, i,
+        err;
+
+    // borrowed from substack's node-brake, which is the twin we didn't know of
+    if (!this.writable) {
+        err = new Error('stream not writable');
+        err.code = 'EPIPE';
+        this.emit('error', err);
+        return false;
+    }
 
     // start the relase-interval in first write:
     if (! this.releaser) {
