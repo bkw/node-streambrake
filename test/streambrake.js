@@ -29,4 +29,26 @@ describe('StreamBrake', function () {
             }, 1000);
         });
     });
+
+    describe('stream-spec', function () {
+        it('should buffer on pause', function (done) {
+            var spec = require('stream-spec'),
+                tester = require('stream-tester'),
+                streamBrake = new StreamBrake(20000),
+                specTester = spec(streamBrake);
+
+            this.timeout(4000);
+
+            specTester.duplex({strict: true});
+            setTimeout(function () {
+                specTester.validate();
+                done();
+            }, 3000);
+
+            tester.createRandomStream(
+                function () { return 'line ' +  Math.random(); },
+                100
+            ).pipe(streamBrake).pipe(tester.createPauseStream());
+        });
+    });
 });
