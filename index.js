@@ -83,6 +83,7 @@ StreamBrake.prototype.releaseBuffer = function () {
         if (this.endSoon && ! this.buffer.bytesAhead()) {
             // exit
             clearInterval(this.releaser);
+            this.emit('end');
             return;
         }
     }
