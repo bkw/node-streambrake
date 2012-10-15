@@ -91,8 +91,8 @@ StreamBrake.prototype.releaseBuffer = function () {
     } else {
         if (this.endSoon && ! this.buffer.bytesAhead()) {
             // exit
-            this.destroy();
             this.emit('end');
+            this.destroy();
             return;
         }
     }
