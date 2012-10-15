@@ -52,7 +52,7 @@ StreamBrake.prototype.write = function (inBuffer) {
     if (headRoom) {
         // send as much as possible, buffer the rest
         if (inBuffer.length > headRoom) {
-            this.buffer.write(inBuffer.slice(headRoom + 1));
+            this.buffer.write(inBuffer.slice(headRoom));
         }
         return this.send(inBuffer.slice(
             0, Math.min(inBuffer.length, headRoom))
