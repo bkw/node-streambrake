@@ -6,6 +6,9 @@
   "scripts": {
     "test": "node_modules/.bin/mocha"
   },
+  "bin" : {
+    "slowpipe" : "./bin/slowpipe"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:bkw/node-streambrake.git"
