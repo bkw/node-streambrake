@@ -33,4 +33,10 @@ than `bytesPerSecond` bytes per second.
 `measurementsPerSecond` is an optional value of how often per second
 to measure throughput and emit queued data. Default is 5.
 
+## See also
+
+* [node-brake](https://github.com/substack/node-brake/) which basically does the
+same, but is by substack, and thus good. I wish I had seen it before I starting
+writing this module.
+
 
