@@ -23,9 +23,7 @@ StreamBrake = function (bps, numBuckets) {
     }
 
     this.buffer = Buffy.createReader();
-
     this.paused = false;
-
     this.relaser = null;
     this.endSoon = false;
 };
