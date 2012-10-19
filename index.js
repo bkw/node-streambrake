@@ -1,14 +1,13 @@
 'use strict';
 
-var util   = require('util')
-  , Stream = require('stream').Stream
-  , Buffy = require('buffy')
-  , StreamBrake
-  ;
+var util   = require('util'),
+    Stream = require('stream').Stream,
+    Buffy = require('buffy'),
+    StreamBrake;
 
 
 StreamBrake = function (bps, numBuckets) {
-    var that = this, i;
+    var i;
     Stream.call(this);
 
     this.numBuckets = numBuckets || 5;
@@ -32,7 +31,7 @@ util.inherits(StreamBrake, Stream);
 
 StreamBrake.prototype.write = function (inBuffer) {
     var that = this,
-        headRoom, i,
+        headRoom,
         err;
 
     // borrowed from substack's node-brake, which is the twin we didn't know of
